@@ -7,89 +7,78 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --wa-green:#25D366;--wa-dark:#075E54;--wa-teal:#128C7E;
-  --wa-light:#dcf8c6;--wa-bg:#efeae2;
+  --g:#25D366;--gd:#075E54;--gt:#128C7E;
   --bg:#f0f2f5;--card:#fff;--brd:#dde1e7;
   --txt:#111b21;--muted:#667781;--hint:#8696a0;
   --r:12px;--rs:8px;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
 
-/* HEADER */
-.header{background:var(--wa-dark);padding:.85rem 1.2rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:99;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.hico{width:34px;height:34px;fill:#fff;flex-shrink:0}
-.htitle{font-size:17px;font-weight:700;color:#fff;line-height:1.2}
+.header{background:var(--gd);padding:.85rem 1.2rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:99}
+.hico{width:32px;height:32px;fill:#fff;flex-shrink:0}
+.htitle{font-size:17px;font-weight:700;color:#fff}
 .hsub{font-size:11px;color:rgba(255,255,255,.65)}
 
 .main{max-width:680px;margin:0 auto;padding:1.2rem 1rem 6rem}
 
 /* UPLOAD */
-.upload-zone{border:2px dashed #b2bac2;border-radius:var(--r);padding:1.8rem 1.2rem;text-align:center;cursor:pointer;transition:all .18s;background:var(--card);margin-bottom:1rem}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--wa-green);background:#f0fff6}
-.uico{font-size:34px;margin-bottom:.5rem}
+.upload-zone{border:2px dashed #c0c8d0;border-radius:var(--r);padding:1.8rem 1.2rem;text-align:center;cursor:pointer;transition:all .18s;background:var(--card);margin-bottom:1rem}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--g);background:#f0fff6}
+.uico{font-size:34px;margin-bottom:.4rem}
 .utitle{font-size:14px;font-weight:600;margin-bottom:.2rem}
 .usub{font-size:12px;color:var(--muted)}
 #file-input{display:none}
-.fpill{display:inline-flex;align-items:center;gap:5px;font-size:12px;background:#e9fef0;color:var(--wa-dark);padding:3px 11px;border-radius:999px;font-weight:600;margin-top:.6rem}
+.fpill{display:inline-flex;align-items:center;gap:5px;font-size:12px;background:#e9fef0;color:var(--gd);padding:3px 11px;border-radius:999px;font-weight:600;margin-top:.6rem}
 
 /* SETTINGS */
 .scard{background:var(--card);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:1rem;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .flabel{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem;display:block}
 .finput{width:100%;font-size:14px;padding:9px 12px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fafafa;color:var(--txt);font-family:inherit;outline:none;transition:border .15s;margin-bottom:.85rem}
-.finput:focus{border-color:var(--wa-teal)}
+.finput:focus{border-color:var(--gt)}
 .row2{display:flex;gap:10px;flex-wrap:wrap}
 .cg{display:flex;flex-direction:column;flex:1;min-width:140px;gap:.3rem}
 .cg select{font-size:13px;padding:8px 10px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fafafa;color:var(--txt);outline:none;cursor:pointer}
-.cg select:focus{border-color:var(--wa-teal)}
+.cg select:focus{border-color:var(--gt)}
 
-/* GENERATE BTN */
-.btn-gen{width:100%;background:var(--wa-dark);color:#fff;border:none;padding:12px;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;margin-top:.9rem;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s}
-.btn-gen:hover{background:var(--wa-teal)}
+.btn-gen{width:100%;background:var(--gd);color:#fff;border:none;padding:12px;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;margin-top:.9rem;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s}
+.btn-gen:hover{background:var(--gt)}
 .btn-gen svg{width:17px;height:17px;fill:#fff}
 
 /* STATS */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
 .sbox{background:var(--card);border-radius:var(--rs);padding:.7rem;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.06)}
-.sn{font-size:24px;font-weight:700;color:var(--wa-dark)}
+.sn{font-size:24px;font-weight:700;color:var(--gd)}
 .sl{font-size:11px;color:var(--muted);margin-top:1px}
 
 /* CONTACT CARD */
 .ccard{background:var(--card);border-radius:var(--r);margin-bottom:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
-
-/* card header */
 .ctop{display:flex;align-items:center;gap:10px;padding:.8rem 1rem;background:#f0f2f5;border-bottom:1px solid #e9edef}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--wa-dark);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
 .ninfo{flex:1;min-width:0}
-.nbig{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nbig{font-size:15px;font-weight:700}
 .nsmall{font-size:11px;color:var(--muted)}
-.opill{font-size:11px;background:#e9fef0;color:var(--wa-dark);border:1px solid #c3e8ce;padding:2px 9px;border-radius:999px;font-weight:600;flex-shrink:0}
+.opill{font-size:11px;background:#e9fef0;color:var(--gd);border:1px solid #c3e8ce;padding:2px 9px;border-radius:999px;font-weight:600;flex-shrink:0}
 
-/* image bg like WhatsApp wallpaper */
-.img-wrap{background:var(--wa-bg);padding:.85rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
+/* WhatsApp chat bg */
+.img-wrap{background:#efeae2;padding:.85rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
 .img-wrap canvas{max-width:100%;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.18);display:block}
 
 /* SEND BUTTON */
-.btn-send{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--wa-green);color:#fff;border:none;border-radius:10px;padding:14px 18px;font-size:15px;font-weight:700;cursor:pointer;width:100%;transition:background .15s;letter-spacing:.01em;box-shadow:0 2px 8px rgba(37,211,102,.3)}
+.btn-send{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--g);color:#fff;border:none;border-radius:10px;padding:14px 18px;font-size:15px;font-weight:700;cursor:pointer;width:100%;transition:all .15s;box-shadow:0 2px 8px rgba(37,211,102,.35);letter-spacing:.01em}
 .btn-send:hover{background:#1ebe5a}
-.btn-send:active{background:var(--wa-teal);transform:scale(.99)}
+.btn-send:active{transform:scale(.98)}
 .btn-send svg{width:20px;height:20px;fill:#fff;flex-shrink:0}
 
-/* status row under send button */
-.status-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem .1rem 0}
-.share-hint{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.share-hint svg{width:12px;height:12px;fill:var(--muted)}
-.btn-dlonly{background:none;border:none;font-size:11px;color:var(--hint);cursor:pointer;display:flex;align-items:center;gap:3px;padding:0}
-.btn-dlonly:hover{color:var(--txt)}
-.btn-dlonly svg{width:12px;height:12px;fill:currentColor}
-
-/* mobile share badge */
-.share-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:#e9fef0;color:var(--wa-dark);border:1px solid #c3e8ce;padding:2px 9px;border-radius:999px;font-weight:600}
-
-/* toast */
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1f2c34;color:#fff;padding:9px 18px;border-radius:999px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center}
-.toast.show{opacity:1}
+/* HOW IT WORKS hint */
+.how-hint{width:100%;background:rgba(0,0,0,.04);border-radius:8px;padding:.55rem .9rem;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.how-hint svg{width:13px;height:13px;fill:var(--g);flex-shrink:0}
 
 .errmsg{background:#fde8e8;border:1px solid #f5c6c6;color:#c0392b;border-radius:var(--rs);padding:9px 13px;margin:.75rem 0;font-size:13px}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1f2c34;color:#fff;padding:9px 20px;border-radius:999px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+
 .pfooter{text-align:center;padding:2rem 1rem;font-size:11px;color:var(--hint)}
 @media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}.row2{flex-direction:column}}
 </style>
@@ -98,12 +87,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-seri
 
 <div class="header">
   <svg class="hico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  <div><div class="htitle">WhatsApp Excel Sender</div><div class="hsub">Table image → Direct WhatsApp pe share</div></div>
+  <div><div class="htitle">WhatsApp Excel Sender</div><div class="hsub">Image download → us number ka WhatsApp seedha khulega</div></div>
 </div>
 
 <div class="main">
 
-  <!-- UPLOAD -->
   <div class="upload-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
     <div class="uico">📊</div>
     <div class="utitle">Excel file drop karo ya click karo</div>
@@ -112,7 +100,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-seri
     <input type="file" id="file-input" accept=".xlsx,.xls,.csv"/>
   </div>
 
-  <!-- SETTINGS -->
   <div class="scard" id="settings" style="display:none">
     <label class="flabel">Footer line (har image ke neeche)</label>
     <input class="finput" id="footer-text" type="text" value="Onmove//Zast//Transin Pod courier kijiye jaldi"/>
@@ -138,37 +125,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-seri
 
   <div id="err-box"></div>
 
-  <!-- RESULTS -->
   <div id="results" style="display:none">
     <div class="stats" id="stats"></div>
     <div id="cards"></div>
   </div>
 
 </div>
+
 <div class="pfooter">Personal Tool • Sirf tumhara use</div>
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-/* ── constants ── */
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-let data=[],hdrs=[],dateCols=new Set(),canvases=[];
-
-const IS_MOBILE=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+let rows=[],hdrs=[],dateCols=new Set(),canvases=[];
 
 const THEMES={
-  green:{bg:'#fff',titBg:'#075E54',titTxt:'#fff',hBg:'#128C7E',hTxt:'#fff',
-         r1:'#fff',r2:'#f7fdf9',cell:'#111b21',brd:'#d0ead8',
-         footBg:'#dcf8c6',footTxt:'#075E54'},
-  dark:{bg:'#1f2c34',titBg:'#111b21',titTxt:'#e9edef',hBg:'#2a3942',hTxt:'#e9edef',
-        r1:'#1f2c34',r2:'#182028',cell:'#e9edef',brd:'#3b4a54',
-        footBg:'#111b21',footTxt:'#00a884'},
-  blue:{bg:'#fff',titBg:'#0d47a1',titTxt:'#fff',hBg:'#1565c0',hTxt:'#fff',
-        r1:'#fff',r2:'#f0f6ff',cell:'#0a1929',brd:'#bbdefb',
-        footBg:'#e3f2fd',footTxt:'#0d47a1'}
+  green:{bg:'#fff',titBg:'#075E54',titTxt:'#fff',hBg:'#128C7E',hTxt:'#fff',r1:'#fff',r2:'#f7fdf9',cell:'#111b21',brd:'#c8e6c9',footBg:'#dcf8c6',footTxt:'#075E54'},
+  dark:{bg:'#1f2c34',titBg:'#111b21',titTxt:'#e9edef',hBg:'#2a3942',hTxt:'#e9edef',r1:'#1f2c34',r2:'#182028',cell:'#e9edef',brd:'#3b4a54',footBg:'#111b21',footTxt:'#00a884'},
+  blue:{bg:'#fff',titBg:'#0d47a1',titTxt:'#fff',hBg:'#1565c0',hTxt:'#fff',r1:'#fff',r2:'#f0f6ff',cell:'#0a1929',brd:'#bbdefb',footBg:'#e3f2fd',footTxt:'#0d47a1'}
 };
 
-/* ── helpers ── */
 function toDate(v){
   if(!v&&v!==0)return'';
   if(typeof v==='string'){const d=new Date(v);if(!isNaN(d))return fmt(d);return v;}
@@ -177,13 +154,13 @@ function toDate(v){
 }
 function fmt(d){return String(d.getUTCDate()).padStart(2,'0')+'-'+MONTHS[d.getUTCMonth()]+'-'+String(d.getUTCFullYear()).slice(-2)}
 function isDateCol(h,vals){return/date|dt|day/i.test(h)||vals.filter(v=>typeof v==='number'&&v>40000&&v<60000).length>vals.length*.5}
-function phone(raw){let n=String(raw).replace(/[\s\-\(\)\+\.]/g,'');if(n.startsWith('0'))n='91'+n.slice(1);if(n.length===10)n='91'+n;return n.replace(/\D/g,'')}
-function cell(row,ci){const v=row[ci];return dateCols.has(ci)?toDate(v):(v??'')}
+function cleanNum(raw){let n=String(raw).replace(/[\s\-\(\)\+\.]/g,'');if(n.startsWith('0'))n='91'+n.slice(1);if(n.length===10)n='91'+n;return n.replace(/\D/g,'')}
+function getCell(row,ci){const v=row[ci];return dateCols.has(ci)?toDate(v):(v??'')}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function toast(msg,ms=3500){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),ms)}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
 
-/* ── draw canvas ── */
-function draw(rows,mci,rawPhone,footer,theme){
+/* ── DRAW IMAGE ── */
+function drawImg(dataRows, mci, rawPhone, footer, theme){
   const T=THEMES[theme]||THEMES.green;
   const cols=hdrs.map((_,i)=>i!==mci?i:null).filter(i=>i!==null);
   const DPR=2,F='Arial',PAD=14,RH=36,HH=42,TH=46,FH=44,FS=12,HFS=12;
@@ -193,110 +170,94 @@ function draw(rows,mci,rawPhone,footer,theme){
   const cw=cols.map(ci=>{
     let w=tmp.measureText(hdrs[ci]).width+PAD*2;
     tmp.font=`${FS}px ${F}`;
-    rows.forEach(r=>{w=Math.max(w,tmp.measureText(String(cell(r,ci)).slice(0,22)).width+PAD*2);});
+    dataRows.forEach(r=>{w=Math.max(w,tmp.measureText(String(getCell(r,ci)).slice(0,22)).width+PAD*2);});
     tmp.font=`bold ${HFS}px ${F}`;
     return Math.max(w,80);
   });
 
   const W=Math.max(cw.reduce((a,b)=>a+b,0),460);
-  const H=TH+HH+rows.length*RH+FH;
+  const H=TH+HH+dataRows.length*RH+FH;
   const cv=document.createElement('canvas');
-  cv.width=W*DPR;cv.height=H*DPR;
-  cv.style.width=W+'px';cv.style.height=H+'px';
-  const ctx=cv.getContext('2d');ctx.scale(DPR,DPR);
+  cv.width=W*DPR; cv.height=H*DPR;
+  cv.style.width=W+'px'; cv.style.height=H+'px';
+  const ctx=cv.getContext('2d'); ctx.scale(DPR,DPR);
 
-  ctx.fillStyle=T.bg;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=T.bg; ctx.fillRect(0,0,W,H);
 
   // title
-  ctx.fillStyle=T.titBg;ctx.fillRect(0,0,W,TH);
-  ctx.fillStyle=T.titTxt;ctx.font=`bold 14px ${F}`;
-  ctx.fillText('Orders — '+rawPhone,PAD,TH/2+5);
+  ctx.fillStyle=T.titBg; ctx.fillRect(0,0,W,TH);
+  ctx.fillStyle=T.titTxt; ctx.font=`bold 14px ${F}`;
+  ctx.fillText('Orders — '+rawPhone, PAD, TH/2+5);
 
   // header
-  ctx.fillStyle=T.hBg;ctx.fillRect(0,TH,W,HH);
+  ctx.fillStyle=T.hBg; ctx.fillRect(0,TH,W,HH);
   let x=0;
   cols.forEach((ci,i)=>{
-    ctx.fillStyle=T.hTxt;ctx.font=`bold ${HFS}px ${F}`;
-    ctx.fillText(hdrs[ci],x+PAD,TH+HH/2+5);
+    ctx.fillStyle=T.hTxt; ctx.font=`bold ${HFS}px ${F}`;
+    ctx.fillText(hdrs[ci], x+PAD, TH+HH/2+5);
     x+=cw[i];
     if(i<cols.length-1){
-      ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;
-      ctx.beginPath();ctx.moveTo(x,TH+7);ctx.lineTo(x,TH+HH-7);ctx.stroke();
+      ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(x,TH+7); ctx.lineTo(x,TH+HH-7); ctx.stroke();
     }
   });
 
-  // rows
-  rows.forEach((row,ri)=>{
+  // data rows
+  dataRows.forEach((row,ri)=>{
     const y=TH+HH+ri*RH;
-    ctx.fillStyle=ri%2===0?T.r1:T.r2;ctx.fillRect(0,y,W,RH);
-    ctx.strokeStyle=T.brd;ctx.lineWidth=.5;
-    ctx.beginPath();ctx.moveTo(0,y+RH);ctx.lineTo(W,y+RH);ctx.stroke();
+    ctx.fillStyle=ri%2===0?T.r1:T.r2; ctx.fillRect(0,y,W,RH);
+    ctx.strokeStyle=T.brd; ctx.lineWidth=.5;
+    ctx.beginPath(); ctx.moveTo(0,y+RH); ctx.lineTo(W,y+RH); ctx.stroke();
     x=0;
     cols.forEach((ci,i)=>{
-      ctx.fillStyle=T.cell;ctx.font=`${FS}px ${F}`;
-      ctx.fillText(String(cell(row,ci)).slice(0,22),x+PAD,y+RH/2+5);
+      ctx.fillStyle=T.cell; ctx.font=`${FS}px ${F}`;
+      ctx.fillText(String(getCell(row,ci)).slice(0,22), x+PAD, y+RH/2+5);
       x+=cw[i];
       if(i<cols.length-1){
-        ctx.strokeStyle=T.brd;ctx.lineWidth=.5;
-        ctx.beginPath();ctx.moveTo(x,y+4);ctx.lineTo(x,y+RH-4);ctx.stroke();
+        ctx.strokeStyle=T.brd; ctx.lineWidth=.5;
+        ctx.beginPath(); ctx.moveTo(x,y+4); ctx.lineTo(x,y+RH-4); ctx.stroke();
       }
     });
   });
 
   // footer
-  const fy=TH+HH+rows.length*RH;
-  ctx.fillStyle=T.footBg;ctx.fillRect(0,fy,W,FH);
-  ctx.strokeStyle=T.brd;ctx.lineWidth=1;
-  ctx.beginPath();ctx.moveTo(0,fy);ctx.lineTo(W,fy);ctx.stroke();
-  if(footer){
-    ctx.fillStyle=T.footTxt;ctx.font=`bold 13px ${F}`;
-    ctx.fillText(footer,PAD,fy+FH/2+5);
-  }
-  ctx.strokeStyle=T.brd;ctx.lineWidth=1;ctx.strokeRect(.5,.5,W-1,H-1);
+  const fy=TH+HH+dataRows.length*RH;
+  ctx.fillStyle=T.footBg; ctx.fillRect(0,fy,W,FH);
+  ctx.strokeStyle=T.brd; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(0,fy); ctx.lineTo(W,fy); ctx.stroke();
+  if(footer){ ctx.fillStyle=T.footTxt; ctx.font=`bold 13px ${F}`; ctx.fillText(footer,PAD,fy+FH/2+5); }
+
+  ctx.strokeStyle=T.brd; ctx.lineWidth=1; ctx.strokeRect(.5,.5,W-1,H-1);
   return cv;
 }
 
-/* ── canvas → File ── */
-function cvToFile(cv,name){
-  return new Promise(res=>cv.toBlob(b=>res(new File([b],name,{type:'image/png'})),'image/png'));
-}
-function dlCv(cv,name){const a=document.createElement('a');a.download=name;a.href=cv.toDataURL('image/png');a.click();}
+/* ── SEND: image download + direct WA number open ── */
+function sendWA(idx){
+  const {cv, num, raw} = canvases[idx];
+  const fname = num + '_orders.png';
 
-/* ── SEND LOGIC ── */
-async function sendWA(idx){
-  const {cv,num,raw}=canvases[idx];
-  const footer=document.getElementById('footer-text').value.trim();
-  const fname=num+'_orders.png';
-  const waUrl='https://wa.me/'+num+(footer?'?text='+encodeURIComponent(footer):'');
+  // 1️⃣ Image download karo
+  const a = document.createElement('a');
+  a.download = fname;
+  a.href = cv.toDataURL('image/png');
+  a.click();
 
-  if(IS_MOBILE && navigator.canShare){
-    try{
-      const file=await cvToFile(cv,fname);
-      if(navigator.canShare({files:[file]})){
-        await navigator.share({files:[file],title:'Order Details — '+raw});
-        return; // done — user picked WhatsApp in share sheet
-      }
-    }catch(e){
-      if(e.name==='AbortError')return; // user cancelled share sheet
-    }
-  }
-
-  // Desktop fallback
-  dlCv(cv,fname);
+  // 2️⃣ Directly us number ka WhatsApp open karo (0.6s baad taaki download start ho)
   setTimeout(()=>{
-    window.open(waUrl,'_blank');
-    toast('✅ Image download ho gayi! WhatsApp mein 📎 se attach karo aur Send karo.');
-  },500);
+    window.open('https://wa.me/' + num, '_blank');
+  }, 600);
+
+  showToast('📥 Image download ho rahi hai → WhatsApp khul raha hai...');
 }
 
-/* ── FILE INPUT ── */
-const dz=document.getElementById('drop-zone'),fi=document.getElementById('file-input');
+/* ── FILE LOAD ── */
+const dz=document.getElementById('drop-zone'), fi=document.getElementById('file-input');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');if(e.dataTransfer.files[0])load(e.dataTransfer.files[0]);});
-fi.addEventListener('change',e=>{if(e.target.files[0])load(e.target.files[0]);});
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');if(e.dataTransfer.files[0])loadFile(e.dataTransfer.files[0]);});
+fi.addEventListener('change',e=>{if(e.target.files[0])loadFile(e.target.files[0]);});
 
-function load(file){
+function loadFile(file){
   document.getElementById('fname-display').innerHTML='<div class="fpill">📄 '+esc(file.name)+'</div>';
   const r=new FileReader();
   r.onload=ev=>{
@@ -304,13 +265,13 @@ function load(file){
       const wb=XLSX.read(ev.target.result,{type:'binary',cellDates:false});
       const ws=wb.Sheets[wb.SheetNames[0]];
       const json=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:true});
-      if(json.length<2){showErr('Data nahi mila file mein.');return;}
+      if(json.length<2){showErr('Data nahi mila.');return;}
       hdrs=json[0].map(h=>String(h).trim());
-      data=json.slice(1).filter(r=>r.some(c=>c!==''));
+      rows=json.slice(1).filter(r=>r.some(c=>c!==''));
       dateCols=new Set();
-      hdrs.forEach((h,i)=>{if(isDateCol(h,data.map(r=>r[i])))dateCols.add(i);});
-      setupCols();hideErr();
-    }catch(e){showErr('File read error: '+e.message);}
+      hdrs.forEach((h,i)=>{if(isDateCol(h,rows.map(r=>r[i])))dateCols.add(i);});
+      setupCols(); hideErr();
+    }catch(e){showErr('File error: '+e.message);}
   };
   r.readAsBinaryString(file);
 }
@@ -326,75 +287,66 @@ function setupCols(){
 function showErr(m){document.getElementById('err-box').innerHTML='<div class="errmsg">'+esc(m)+'</div>';}
 function hideErr(){document.getElementById('err-box').innerHTML='';}
 
-/* ── PROCESS ── */
+/* ── PROCESS DATA ── */
 function processData(){
   const mci=parseInt(document.getElementById('mobile-col').value);
   const theme=document.getElementById('img-style').value;
   const footer=document.getElementById('footer-text').value.trim();
 
   const groups={};
-  data.forEach(row=>{
-    const raw=row[mci];if(!raw&&raw!==0)return;
-    const p=phone(raw);if(p.length<10)return;
+  rows.forEach(row=>{
+    const raw=row[mci]; if(!raw&&raw!==0)return;
+    const p=cleanNum(raw); if(p.length<10)return;
     if(!groups[p])groups[p]={raw,rows:[]};
     groups[p].rows.push(row);
   });
   const ga=Object.entries(groups);
-  if(!ga.length){showErr('Koi valid number nahi mila. Column check karo.');return;}
-  hideErr();canvases=[];
+  if(!ga.length){showErr('Koi valid number nahi mila.');return;}
+  hideErr(); canvases=[];
 
   document.getElementById('stats').innerHTML=
-    `<div class="sbox"><div class="sn">${data.length}</div><div class="sl">Total Rows</div></div>`+
+    `<div class="sbox"><div class="sn">${rows.length}</div><div class="sl">Total Rows</div></div>`+
     `<div class="sbox"><div class="sn">${ga.length}</div><div class="sl">Numbers</div></div>`+
     `<div class="sbox"><div class="sn">${ga.length}</div><div class="sl">Images</div></div>`;
 
-  const container=document.getElementById('cards');container.innerHTML='';
+  const container=document.getElementById('cards');
+  container.innerHTML='';
 
-  ga.forEach(([num,{raw,rows}],idx)=>{
-    const cv=draw(rows,mci,raw,footer,theme);
-    canvases.push({cv,num,raw});
+  ga.forEach(([num,{raw,rows:r}],idx)=>{
+    const cv=drawImg(r, mci, raw, footer, theme);
+    canvases.push({cv, num, raw});
 
-    /* ── determine button label & hint ── */
-    const isMob=IS_MOBILE&&navigator.canShare;
-    const btnLabel=isMob
-      ? `<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg> Share to WhatsApp`
-      : `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Send on WhatsApp`;
-
-    const hintHtml=isMob
-      ? `<span class="share-hint"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Share sheet mein WhatsApp choose karo → Send!</span>`
-      : `<span class="share-hint"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Image download hogi → WhatsApp khulega → Attach → Send</span>`;
-
-    /* ── build card ── */
     const card=document.createElement('div');
     card.className='ccard';
 
-    // top bar
-    const top=document.createElement('div');top.className='ctop';
+    /* top bar */
+    const top=document.createElement('div'); top.className='ctop';
     top.innerHTML=
       `<div class="avatar">${esc(String(raw).slice(-2))}</div>`+
       `<div class="ninfo"><div class="nbig">${esc(String(raw))}</div><div class="nsmall">+${num}</div></div>`+
-      `<span class="opill">${rows.length} order${rows.length>1?'s':''}</span>`;
+      `<span class="opill">${r.length} order${r.length>1?'s':''}</span>`;
 
-    // image wrap
-    const wrap=document.createElement('div');wrap.className='img-wrap';
+    /* image area */
+    const wrap=document.createElement('div'); wrap.className='img-wrap';
     wrap.appendChild(cv);
 
-    // send button
-    const btn=document.createElement('button');btn.className='btn-send';
-    btn.innerHTML=btnLabel;
+    /* SEND BUTTON */
+    const btn=document.createElement('button'); btn.className='btn-send';
+    btn.innerHTML=
+      `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`+
+      `Send — ${esc(String(raw))}`;
     btn.onclick=()=>sendWA(idx);
     wrap.appendChild(btn);
 
-    // status row
-    const srow=document.createElement('div');srow.className='status-row';
-    srow.innerHTML=hintHtml;
-    const dlbtn=document.createElement('button');dlbtn.className='btn-dlonly';
-    dlbtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download only';
-    dlbtn.onclick=()=>dlCv(cv,num+'_orders.png');
-    srow.appendChild(dlbtn);
-    wrap.appendChild(srow);
+    /* how it works hint */
+    const hint=document.createElement('div'); hint.className='how-hint';
+    hint.innerHTML=
+      `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>`+
+      `Image download hogi + <strong style="color:#075E54">+${num}</strong> ka WhatsApp seedha khulega → 📎 attach karo → Send!`;
+    wrap.appendChild(hint);
 
-    card.appendChild(top);card.appendChild(wrap);
+    card.appendChild(top);
+    card.appendChild(wrap);
     container.appendChild(card);
   });
 
