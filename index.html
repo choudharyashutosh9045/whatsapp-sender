@@ -21,7 +21,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 .main{max-width:680px;margin:0 auto;padding:1.2rem 1rem 6rem}
 
-/* UPLOAD */
 .upload-zone{border:2px dashed #c0c8d0;border-radius:var(--r);padding:1.8rem 1.2rem;text-align:center;cursor:pointer;transition:all .18s;background:var(--card);margin-bottom:1rem}
 .upload-zone:hover,.upload-zone.drag{border-color:var(--g);background:#f0fff6}
 .uico{font-size:34px;margin-bottom:.4rem}
@@ -30,7 +29,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 #file-input{display:none}
 .fpill{display:inline-flex;align-items:center;gap:5px;font-size:12px;background:#e9fef0;color:var(--gd);padding:3px 11px;border-radius:999px;font-weight:600;margin-top:.6rem}
 
-/* SETTINGS */
 .scard{background:var(--card);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:1rem;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .flabel{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem;display:block}
 .finput{width:100%;font-size:14px;padding:9px 12px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fafafa;color:var(--txt);font-family:inherit;outline:none;transition:border .15s;margin-bottom:.85rem}
@@ -38,19 +36,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .row2{display:flex;gap:10px;flex-wrap:wrap}
 .cg{display:flex;flex-direction:column;flex:1;min-width:140px;gap:.3rem}
 .cg select{font-size:13px;padding:8px 10px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fafafa;color:var(--txt);outline:none;cursor:pointer}
-.cg select:focus{border-color:var(--gt)}
 
 .btn-gen{width:100%;background:var(--gd);color:#fff;border:none;padding:12px;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;margin-top:.9rem;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s}
 .btn-gen:hover{background:var(--gt)}
 .btn-gen svg{width:17px;height:17px;fill:#fff}
 
-/* STATS */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
 .sbox{background:var(--card);border-radius:var(--rs);padding:.7rem;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .sn{font-size:24px;font-weight:700;color:var(--gd)}
 .sl{font-size:11px;color:var(--muted);margin-top:1px}
 
-/* CONTACT CARD */
 .ccard{background:var(--card);border-radius:var(--r);margin-bottom:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
 .ctop{display:flex;align-items:center;gap:10px;padding:.8rem 1rem;background:#f0f2f5;border-bottom:1px solid #e9edef}
 .avatar{width:40px;height:40px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
@@ -59,26 +54,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nsmall{font-size:11px;color:var(--muted)}
 .opill{font-size:11px;background:#e9fef0;color:var(--gd);border:1px solid #c3e8ce;padding:2px 9px;border-radius:999px;font-weight:600;flex-shrink:0}
 
-/* WhatsApp chat bg */
 .img-wrap{background:#efeae2;padding:.85rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
 .img-wrap canvas{max-width:100%;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.18);display:block}
 
-/* SEND BUTTON */
-.btn-send{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--g);color:#fff;border:none;border-radius:10px;padding:14px 18px;font-size:15px;font-weight:700;cursor:pointer;width:100%;transition:all .15s;box-shadow:0 2px 8px rgba(37,211,102,.35);letter-spacing:.01em}
+/* SEND BUTTON - big green */
+.btn-send{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--g);color:#fff;border:none;border-radius:10px;padding:14px 18px;font-size:15px;font-weight:700;cursor:pointer;width:100%;transition:all .15s;box-shadow:0 2px 8px rgba(37,211,102,.35)}
 .btn-send:hover{background:#1ebe5a}
 .btn-send:active{transform:scale(.98)}
 .btn-send svg{width:20px;height:20px;fill:#fff;flex-shrink:0}
 
-/* HOW IT WORKS hint */
-.how-hint{width:100%;background:rgba(0,0,0,.04);border-radius:8px;padding:.55rem .9rem;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
-.how-hint svg{width:13px;height:13px;fill:var(--g);flex-shrink:0}
+.how-hint{width:100%;background:rgba(0,0,0,.045);border-radius:8px;padding:.55rem .9rem;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);line-height:1.5}
+.how-hint svg{width:13px;height:13px;fill:var(--g);flex-shrink:0;margin-top:1px}
+
+/* iOS notice */
+.ios-note{background:#fff8e1;border:1px solid #ffe082;border-radius:var(--rs);padding:.65rem 1rem;font-size:12px;color:#5d4037;margin-bottom:1rem;display:none;line-height:1.5}
 
 .errmsg{background:#fde8e8;border:1px solid #f5c6c6;color:#c0392b;border-radius:var(--rs);padding:9px 13px;margin:.75rem 0;font-size:13px}
-
-/* TOAST */
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1f2c34;color:#fff;padding:9px 20px;border-radius:999px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1f2c34;color:#fff;padding:9px 20px;border-radius:999px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;max-width:92vw;text-align:center}
 .toast.show{opacity:1}
-
 .pfooter{text-align:center;padding:2rem 1rem;font-size:11px;color:var(--hint)}
 @media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}.row2{flex-direction:column}}
 </style>
@@ -87,10 +80,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="header">
   <svg class="hico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  <div><div class="htitle">WhatsApp Excel Sender</div><div class="hsub">Image download → us number ka WhatsApp seedha khulega</div></div>
+  <div>
+    <div class="htitle">WhatsApp Excel Sender</div>
+    <div class="hsub">Regular WhatsApp pe seedha bhejo</div>
+  </div>
 </div>
 
 <div class="main">
+
+  <!-- iOS notice — shown only on iPhone -->
+  <div class="ios-note" id="ios-note">
+    ℹ️ <strong>iPhone users:</strong> Image download hogi → WhatsApp chat seedha khulega → Gallery se image attach karo → Send karo.
+  </div>
 
   <div class="upload-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
     <div class="uico">📊</div>
@@ -132,11 +133,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 </div>
 
-<div class="pfooter">Personal Tool • Sirf tumhara use</div>
+<div class="pfooter">Personal Tool • Regular WhatsApp</div>
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
+/* ── Device detection ── */
+const isAndroid = /Android/i.test(navigator.userAgent);
+const isIOS     = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+// Show iOS note if needed
+if(isIOS) document.getElementById('ios-note').style.display='block';
+
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 let rows=[],hdrs=[],dateCols=new Set(),canvases=[];
 
@@ -157,14 +165,13 @@ function isDateCol(h,vals){return/date|dt|day/i.test(h)||vals.filter(v=>typeof v
 function cleanNum(raw){let n=String(raw).replace(/[\s\-\(\)\+\.]/g,'');if(n.startsWith('0'))n='91'+n.slice(1);if(n.length===10)n='91'+n;return n.replace(/\D/g,'')}
 function getCell(row,ci){const v=row[ci];return dateCols.has(ci)?toDate(v):(v??'')}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
+function showToast(msg,dur=3500){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur)}
 
 /* ── DRAW IMAGE ── */
-function drawImg(dataRows, mci, rawPhone, footer, theme){
+function drawImg(dataRows,mci,rawPhone,footer,theme){
   const T=THEMES[theme]||THEMES.green;
   const cols=hdrs.map((_,i)=>i!==mci?i:null).filter(i=>i!==null);
   const DPR=2,F='Arial',PAD=14,RH=36,HH=42,TH=46,FH=44,FS=12,HFS=12;
-
   const tmp=document.createElement('canvas').getContext('2d');
   tmp.font=`bold ${HFS}px ${F}`;
   const cw=cols.map(ci=>{
@@ -174,84 +181,75 @@ function drawImg(dataRows, mci, rawPhone, footer, theme){
     tmp.font=`bold ${HFS}px ${F}`;
     return Math.max(w,80);
   });
-
   const W=Math.max(cw.reduce((a,b)=>a+b,0),460);
   const H=TH+HH+dataRows.length*RH+FH;
   const cv=document.createElement('canvas');
-  cv.width=W*DPR; cv.height=H*DPR;
-  cv.style.width=W+'px'; cv.style.height=H+'px';
-  const ctx=cv.getContext('2d'); ctx.scale(DPR,DPR);
-
-  ctx.fillStyle=T.bg; ctx.fillRect(0,0,W,H);
-
-  // title
-  ctx.fillStyle=T.titBg; ctx.fillRect(0,0,W,TH);
-  ctx.fillStyle=T.titTxt; ctx.font=`bold 14px ${F}`;
-  ctx.fillText('Orders — '+rawPhone, PAD, TH/2+5);
-
-  // header
-  ctx.fillStyle=T.hBg; ctx.fillRect(0,TH,W,HH);
+  cv.width=W*DPR;cv.height=H*DPR;cv.style.width=W+'px';cv.style.height=H+'px';
+  const ctx=cv.getContext('2d');ctx.scale(DPR,DPR);
+  ctx.fillStyle=T.bg;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=T.titBg;ctx.fillRect(0,0,W,TH);
+  ctx.fillStyle=T.titTxt;ctx.font=`bold 14px ${F}`;ctx.fillText('Orders — '+rawPhone,PAD,TH/2+5);
+  ctx.fillStyle=T.hBg;ctx.fillRect(0,TH,W,HH);
   let x=0;
   cols.forEach((ci,i)=>{
-    ctx.fillStyle=T.hTxt; ctx.font=`bold ${HFS}px ${F}`;
-    ctx.fillText(hdrs[ci], x+PAD, TH+HH/2+5);
-    x+=cw[i];
-    if(i<cols.length-1){
-      ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.lineWidth=1;
-      ctx.beginPath(); ctx.moveTo(x,TH+7); ctx.lineTo(x,TH+HH-7); ctx.stroke();
-    }
+    ctx.fillStyle=T.hTxt;ctx.font=`bold ${HFS}px ${F}`;ctx.fillText(hdrs[ci],x+PAD,TH+HH/2+5);x+=cw[i];
+    if(i<cols.length-1){ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,TH+7);ctx.lineTo(x,TH+HH-7);ctx.stroke();}
   });
-
-  // data rows
   dataRows.forEach((row,ri)=>{
     const y=TH+HH+ri*RH;
-    ctx.fillStyle=ri%2===0?T.r1:T.r2; ctx.fillRect(0,y,W,RH);
-    ctx.strokeStyle=T.brd; ctx.lineWidth=.5;
-    ctx.beginPath(); ctx.moveTo(0,y+RH); ctx.lineTo(W,y+RH); ctx.stroke();
+    ctx.fillStyle=ri%2===0?T.r1:T.r2;ctx.fillRect(0,y,W,RH);
+    ctx.strokeStyle=T.brd;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(0,y+RH);ctx.lineTo(W,y+RH);ctx.stroke();
     x=0;
     cols.forEach((ci,i)=>{
-      ctx.fillStyle=T.cell; ctx.font=`${FS}px ${F}`;
-      ctx.fillText(String(getCell(row,ci)).slice(0,22), x+PAD, y+RH/2+5);
-      x+=cw[i];
-      if(i<cols.length-1){
-        ctx.strokeStyle=T.brd; ctx.lineWidth=.5;
-        ctx.beginPath(); ctx.moveTo(x,y+4); ctx.lineTo(x,y+RH-4); ctx.stroke();
-      }
+      ctx.fillStyle=T.cell;ctx.font=`${FS}px ${F}`;ctx.fillText(String(getCell(row,ci)).slice(0,22),x+PAD,y+RH/2+5);x+=cw[i];
+      if(i<cols.length-1){ctx.strokeStyle=T.brd;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(x,y+4);ctx.lineTo(x,y+RH-4);ctx.stroke();}
     });
   });
-
-  // footer
   const fy=TH+HH+dataRows.length*RH;
-  ctx.fillStyle=T.footBg; ctx.fillRect(0,fy,W,FH);
-  ctx.strokeStyle=T.brd; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(0,fy); ctx.lineTo(W,fy); ctx.stroke();
-  if(footer){ ctx.fillStyle=T.footTxt; ctx.font=`bold 13px ${F}`; ctx.fillText(footer,PAD,fy+FH/2+5); }
-
-  ctx.strokeStyle=T.brd; ctx.lineWidth=1; ctx.strokeRect(.5,.5,W-1,H-1);
+  ctx.fillStyle=T.footBg;ctx.fillRect(0,fy,W,FH);
+  ctx.strokeStyle=T.brd;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,fy);ctx.lineTo(W,fy);ctx.stroke();
+  if(footer){ctx.fillStyle=T.footTxt;ctx.font=`bold 13px ${F}`;ctx.fillText(footer,PAD,fy+FH/2+5);}
+  ctx.strokeStyle=T.brd;ctx.lineWidth=1;ctx.strokeRect(.5,.5,W-1,H-1);
   return cv;
 }
 
-/* ── SEND: image download + direct WA number open ── */
+/* ── OPEN REGULAR WHATSAPP ONLY ── */
+function openRegularWhatsApp(num){
+  if(isAndroid){
+    // Android intent → forces com.whatsapp (regular), NOT com.whatsapp.w4b (business)
+    const intentUrl =
+      `intent://send?phone=%2B${num}` +
+      `#Intent;` +
+      `scheme=whatsapp;` +
+      `package=com.whatsapp;` +           // ← REGULAR WhatsApp only
+      `action=android.intent.action.SENDTO;` +
+      `end`;
+    window.location.href = intentUrl;
+  } else {
+    // iOS / Desktop — whatsapp:// deep link (opens regular WA if default)
+    window.open(`whatsapp://send?phone=%2B${num}`, '_blank');
+  }
+}
+
+/* ── SEND: download image + open regular WA ── */
 function sendWA(idx){
   const {cv, num, raw} = canvases[idx];
   const fname = num + '_orders.png';
 
-  // 1️⃣ Image download karo
+  // 1️⃣ Download image
   const a = document.createElement('a');
   a.download = fname;
   a.href = cv.toDataURL('image/png');
   a.click();
 
-  // 2️⃣ Directly us number ka WhatsApp open karo (0.6s baad taaki download start ho)
-  setTimeout(()=>{
-    window.open('https://wa.me/' + num, '_blank');
-  }, 600);
+  // 2️⃣ Open regular WhatsApp with that number (after short delay)
+  setTimeout(() => openRegularWhatsApp(num), 700);
 
-  showToast('📥 Image download ho rahi hai → WhatsApp khul raha hai...');
+  showToast('📥 Image download ho rahi hai → Regular WhatsApp khul raha hai...');
 }
 
 /* ── FILE LOAD ── */
-const dz=document.getElementById('drop-zone'), fi=document.getElementById('file-input');
+const dz=document.getElementById('drop-zone'),fi=document.getElementById('file-input');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
 dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');if(e.dataTransfer.files[0])loadFile(e.dataTransfer.files[0]);});
@@ -270,7 +268,7 @@ function loadFile(file){
       rows=json.slice(1).filter(r=>r.some(c=>c!==''));
       dateCols=new Set();
       hdrs.forEach((h,i)=>{if(isDateCol(h,rows.map(r=>r[i])))dateCols.add(i);});
-      setupCols(); hideErr();
+      setupCols();hideErr();
     }catch(e){showErr('File error: '+e.message);}
   };
   r.readAsBinaryString(file);
@@ -287,64 +285,60 @@ function setupCols(){
 function showErr(m){document.getElementById('err-box').innerHTML='<div class="errmsg">'+esc(m)+'</div>';}
 function hideErr(){document.getElementById('err-box').innerHTML='';}
 
-/* ── PROCESS DATA ── */
+/* ── PROCESS ── */
 function processData(){
   const mci=parseInt(document.getElementById('mobile-col').value);
   const theme=document.getElementById('img-style').value;
   const footer=document.getElementById('footer-text').value.trim();
-
   const groups={};
   rows.forEach(row=>{
-    const raw=row[mci]; if(!raw&&raw!==0)return;
-    const p=cleanNum(raw); if(p.length<10)return;
+    const raw=row[mci];if(!raw&&raw!==0)return;
+    const p=cleanNum(raw);if(p.length<10)return;
     if(!groups[p])groups[p]={raw,rows:[]};
     groups[p].rows.push(row);
   });
   const ga=Object.entries(groups);
   if(!ga.length){showErr('Koi valid number nahi mila.');return;}
-  hideErr(); canvases=[];
+  hideErr();canvases=[];
 
   document.getElementById('stats').innerHTML=
     `<div class="sbox"><div class="sn">${rows.length}</div><div class="sl">Total Rows</div></div>`+
     `<div class="sbox"><div class="sn">${ga.length}</div><div class="sl">Numbers</div></div>`+
     `<div class="sbox"><div class="sn">${ga.length}</div><div class="sl">Images</div></div>`;
 
-  const container=document.getElementById('cards');
-  container.innerHTML='';
+  const container=document.getElementById('cards');container.innerHTML='';
 
   ga.forEach(([num,{raw,rows:r}],idx)=>{
-    const cv=drawImg(r, mci, raw, footer, theme);
-    canvases.push({cv, num, raw});
+    const cv=drawImg(r,mci,raw,footer,theme);
+    canvases.push({cv,num,raw});
 
-    const card=document.createElement('div');
-    card.className='ccard';
+    const hintText = isAndroid
+      ? `Regular WhatsApp khulega → <strong>📎</strong> se image attach karo → Send!`
+      : `Image download hogi → WhatsApp khulega → Gallery se attach karo → Send!`;
 
-    /* top bar */
-    const top=document.createElement('div'); top.className='ctop';
+    const card=document.createElement('div');card.className='ccard';
+
+    const top=document.createElement('div');top.className='ctop';
     top.innerHTML=
       `<div class="avatar">${esc(String(raw).slice(-2))}</div>`+
       `<div class="ninfo"><div class="nbig">${esc(String(raw))}</div><div class="nsmall">+${num}</div></div>`+
       `<span class="opill">${r.length} order${r.length>1?'s':''}</span>`;
 
-    /* image area */
-    const wrap=document.createElement('div'); wrap.className='img-wrap';
+    const wrap=document.createElement('div');wrap.className='img-wrap';
     wrap.appendChild(cv);
 
-    /* SEND BUTTON */
-    const btn=document.createElement('button'); btn.className='btn-send';
+    const btn=document.createElement('button');btn.className='btn-send';
     btn.innerHTML=
       `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`+
       `Send — ${esc(String(raw))}`;
     btn.onclick=()=>sendWA(idx);
-    wrap.appendChild(btn);
 
-    /* how it works hint */
-    const hint=document.createElement('div'); hint.className='how-hint';
+    const hint=document.createElement('div');hint.className='how-hint';
     hint.innerHTML=
-      `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>`+
-      `Image download hogi + <strong style="color:#075E54">+${num}</strong> ka WhatsApp seedha khulega → 📎 attach karo → Send!`;
-    wrap.appendChild(hint);
+      `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>${hintText}`;
 
+    wrap.appendChild(btn);
+    wrap.appendChild(hint);
     card.appendChild(top);
     card.appendChild(wrap);
     container.appendChild(card);
