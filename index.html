@@ -202,7 +202,13 @@ function drawImg(dataRows,mci,rawPhone,footer,theme){
   const fy=TH+HH+dataRows.length*RH;
   ctx.fillStyle=T.footBg;ctx.fillRect(0,fy,W,FH);
   ctx.strokeStyle=T.brd;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,fy);ctx.lineTo(W,fy);ctx.stroke();
-  if(footer){ctx.fillStyle=T.footTxt;ctx.font=`bold 13px ${F}`;ctx.fillText(footer,PAD,fy+FH/2+5);}
+  if(footer){
+    ctx.fillStyle=T.footTxt;
+    ctx.font=`bold 18px ${F}`;
+    ctx.textAlign='center';
+    ctx.fillText(footer, W/2, fy+FH/2+7);
+    ctx.textAlign='left';
+  }
   ctx.strokeStyle=T.brd;ctx.lineWidth=1;ctx.strokeRect(.5,.5,W-1,H-1);
   return cv;
 }
