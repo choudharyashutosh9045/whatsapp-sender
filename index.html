@@ -2,8 +2,15 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>WhatsApp Excel Sender</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="theme-color" content="#075E54"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="WA Sender"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="icon-192.png"/>
+<title>WA Excel Sender</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -11,17 +18,30 @@
   --bg:#f0f2f5;--card:#fff;--brd:#dde1e7;
   --txt:#111b21;--muted:#667781;--hint:#8696a0;
   --r:12px;--rs:8px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bot: env(safe-area-inset-bottom, 0px);
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;min-height:100dvh;overscroll-behavior:none}
 
-.header{background:var(--gd);padding:.85rem 1.2rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:99}
-.hico{width:32px;height:32px;fill:#fff;flex-shrink:0}
+/* ── INSTALL BANNER ── */
+.install-bar{background:#1f2c34;color:#fff;padding:.7rem 1rem;display:flex;align-items:center;gap:10px;font-size:13px}
+.install-bar.hidden{display:none}
+.install-bar-icon{width:36px;height:36px;border-radius:8px;flex-shrink:0}
+.install-bar-text{flex:1;line-height:1.4}
+.install-bar-text strong{display:block;font-size:14px}
+.btn-install{background:var(--g);color:#fff;border:none;padding:7px 16px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.btn-dismiss{background:none;border:none;color:rgba(255,255,255,.5);font-size:20px;cursor:pointer;padding:0 4px;flex-shrink:0;line-height:1}
+
+/* ── HEADER ── */
+.header{background:var(--gd);padding:calc(.85rem + var(--safe-top)) 1.2rem .85rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:99;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.hico{width:30px;height:30px;fill:#fff;flex-shrink:0}
 .htitle{font-size:17px;font-weight:700;color:#fff}
 .hsub{font-size:11px;color:rgba(255,255,255,.65)}
 
-.main{max-width:680px;margin:0 auto;padding:1.2rem 1rem 6rem}
+.main{max-width:680px;margin:0 auto;padding:1.2rem 1rem calc(5rem + var(--safe-bot))}
 
-.upload-zone{border:2px dashed #c0c8d0;border-radius:var(--r);padding:1.8rem 1.2rem;text-align:center;cursor:pointer;transition:all .18s;background:var(--card);margin-bottom:1rem}
+/* ── UPLOAD ── */
+.upload-zone{border:2px dashed #c0c8d0;border-radius:var(--r);padding:1.8rem 1.2rem;text-align:center;cursor:pointer;transition:all .18s;background:var(--card);margin-bottom:1rem;-webkit-tap-highlight-color:transparent}
 .upload-zone:hover,.upload-zone.drag{border-color:var(--g);background:#f0fff6}
 .uico{font-size:34px;margin-bottom:.4rem}
 .utitle{font-size:14px;font-weight:600;margin-bottom:.2rem}
@@ -29,6 +49,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 #file-input{display:none}
 .fpill{display:inline-flex;align-items:center;gap:5px;font-size:12px;background:#e9fef0;color:var(--gd);padding:3px 11px;border-radius:999px;font-weight:600;margin-top:.6rem}
 
+/* ── SETTINGS ── */
 .scard{background:var(--card);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:1rem;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .flabel{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem;display:block}
 .finput{width:100%;font-size:14px;padding:9px 12px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fafafa;color:var(--txt);font-family:inherit;outline:none;transition:border .15s;margin-bottom:.85rem}
@@ -37,15 +58,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cg{display:flex;flex-direction:column;flex:1;min-width:140px;gap:.3rem}
 .cg select{font-size:13px;padding:8px 10px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fafafa;color:var(--txt);outline:none;cursor:pointer}
 
-.btn-gen{width:100%;background:var(--gd);color:#fff;border:none;padding:12px;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;margin-top:.9rem;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s}
+.btn-gen{width:100%;background:var(--gd);color:#fff;border:none;padding:13px;border-radius:var(--rs);font-size:15px;font-weight:700;cursor:pointer;margin-top:.9rem;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s;-webkit-tap-highlight-color:transparent}
 .btn-gen:hover{background:var(--gt)}
-.btn-gen svg{width:17px;height:17px;fill:#fff}
+.btn-gen svg{width:18px;height:18px;fill:#fff}
 
+/* ── STATS ── */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
 .sbox{background:var(--card);border-radius:var(--rs);padding:.7rem;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .sn{font-size:24px;font-weight:700;color:var(--gd)}
 .sl{font-size:11px;color:var(--muted);margin-top:1px}
 
+/* ── SEARCH ── */
+.search-wrap{position:relative;margin-bottom:1rem}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;fill:#667781;pointer-events:none}
+.search-input{width:100%;padding:12px 12px 12px 38px;border-radius:var(--rs);border:1.5px solid var(--brd);font-size:14px;background:var(--card);color:var(--txt);outline:none;font-family:inherit;box-shadow:0 1px 3px rgba(0,0,0,.07);transition:border .15s}
+.search-input:focus{border-color:var(--gt)}
+.no-result{display:none;text-align:center;padding:2rem 1rem;color:var(--muted);font-size:14px;background:var(--card);border-radius:var(--r)}
+
+/* ── CARD ── */
 .ccard{background:var(--card);border-radius:var(--r);margin-bottom:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
 .ctop{display:flex;align-items:center;gap:10px;padding:.8rem 1rem;background:#f0f2f5;border-bottom:1px solid #e9edef}
 .avatar{width:40px;height:40px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
@@ -57,9 +87,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .img-wrap{background:#efeae2;padding:.85rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
 .img-wrap canvas{max-width:100%;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.18);display:block}
 
-.btn-send{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--g);color:#fff;border:none;border-radius:10px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;width:100%;transition:all .15s;box-shadow:0 2px 8px rgba(37,211,102,.4);letter-spacing:.01em}
-.btn-send:hover{background:#1ebe5a}
-.btn-send:active{transform:scale(.98);background:var(--gt)}
+/* ── SEND BUTTON ── */
+.btn-send{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--g);color:#fff;border:none;border-radius:10px;padding:15px 18px;font-size:16px;font-weight:700;cursor:pointer;width:100%;transition:all .15s;box-shadow:0 2px 8px rgba(37,211,102,.4);-webkit-tap-highlight-color:transparent}
+.btn-send:active{transform:scale(.97);background:var(--gt)}
 .btn-send svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
 
 .how-hint{width:100%;background:rgba(0,0,0,.04);border-radius:8px;padding:.55rem .9rem;display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--muted);line-height:1.6}
@@ -67,37 +97,41 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 .errmsg{background:#fde8e8;border:1px solid #f5c6c6;color:#c0392b;border-radius:var(--rs);padding:9px 13px;margin:.75rem 0;font-size:13px}
 
-/* overlay blocker notice */
-.blocker-tip{background:#fff9e6;border:1px solid #ffe082;border-radius:var(--r);padding:.85rem 1rem;font-size:12px;color:#5d4037;margin-bottom:1rem;line-height:1.6;display:flex;gap:8px;align-items:flex-start}
-.blocker-tip svg{width:16px;height:16px;fill:#f9a825;flex-shrink:0;margin-top:1px}
-
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1f2c34;color:#fff;padding:9px 20px;border-radius:999px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .25s;pointer-events:none;max-width:92vw;text-align:center}
+/* ── TOAST ── */
+.toast{position:fixed;bottom:calc(22px + var(--safe-bot));left:50%;transform:translateX(-50%);background:#1f2c34;color:#fff;padding:10px 22px;border-radius:999px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .25s;pointer-events:none;max-width:92vw;text-align:center;white-space:nowrap}
 .toast.show{opacity:1}
+
 .pfooter{text-align:center;padding:2rem 1rem;font-size:11px;color:var(--hint)}
 @media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}.row2{flex-direction:column}}
 </style>
 </head>
 <body>
 
+<!-- INSTALL BANNER -->
+<div class="install-bar" id="install-bar" style="display:none">
+  <img class="install-bar-icon" src="icon-192.png" alt="icon"/>
+  <div class="install-bar-text">
+    <strong>App Install Karo</strong>
+    Home screen pe shortcut — bilkul app jaisa!
+  </div>
+  <button class="btn-install" id="btn-install">Install</button>
+  <button class="btn-dismiss" id="btn-dismiss">✕</button>
+</div>
+
+<!-- HEADER -->
 <div class="header">
   <svg class="hico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   <div>
-    <div class="htitle">WhatsApp Excel Sender</div>
+    <div class="htitle">WA Excel Sender</div>
     <div class="hsub">Regular WhatsApp — Direct open</div>
   </div>
 </div>
 
 <div class="main">
 
-  <!-- Browser tip -->
-  <div class="blocker-tip">
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-    <span><strong>Best result ke liye:</strong> Ye page <strong>Chrome browser</strong> mein kholo. Chrome mein "Open in WhatsApp" ka popup aayega — Allow karo. Ek baar allow karne ke baad hamesha seedha khulega.</span>
-  </div>
-
   <div class="upload-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
     <div class="uico">📊</div>
-    <div class="utitle">Excel file drop karo ya click karo</div>
+    <div class="utitle">Excel file select karo</div>
     <div class="usub">.xlsx &nbsp;/&nbsp; .xls &nbsp;/&nbsp; .csv</div>
     <div id="fname-display"></div>
     <input type="file" id="file-input" accept=".xlsx,.xls,.csv"/>
@@ -130,20 +164,53 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div id="results" style="display:none">
     <div class="stats" id="stats"></div>
-    <div style="position:relative;margin-bottom:1rem">
-      <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;fill:#667781;pointer-events:none" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-      <input id="search-box" type="tel" placeholder="Number search karo... jaise 7668400284" oninput="filterCards(this.value)" style="width:100%;padding:12px 12px 12px 38px;border-radius:var(--rs);border:1.5px solid var(--brd);font-size:14px;background:var(--card);color:var(--txt);outline:none;font-family:inherit;box-shadow:0 1px 3px rgba(0,0,0,.07);transition:border .15s" onfocus="this.style.borderColor='#128C7E'" onblur="this.style.borderColor='#dde1e7'"/>
+
+    <!-- SEARCH -->
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input class="search-input" id="search-box" type="tel" placeholder="Number search karo... jaise 7668400284" oninput="filterCards(this.value)"/>
     </div>
-    <div id="no-result" style="display:none;text-align:center;padding:2rem 1rem;color:var(--muted);font-size:14px;background:var(--card);border-radius:var(--r)">🔍 Koi number nahi mila</div>
+    <div class="no-result" id="no-result">🔍 Koi number nahi mila</div>
     <div id="cards"></div>
   </div>
+
 </div>
 
-<div class="pfooter">Personal Tool • Regular WhatsApp</div>
+<div class="pfooter">WA Excel Sender • Personal App</div>
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
+/* ══ PWA: Service Worker ══ */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  });
+}
+
+/* ══ PWA: Install Banner ══ */
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  document.getElementById('install-bar').style.display='flex';
+});
+document.getElementById('btn-install').onclick=async()=>{
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  const {outcome}=await deferredPrompt.userChoice;
+  deferredPrompt=null;
+  document.getElementById('install-bar').style.display='none';
+};
+document.getElementById('btn-dismiss').onclick=()=>{
+  document.getElementById('install-bar').style.display='none';
+};
+window.addEventListener('appinstalled',()=>{
+  document.getElementById('install-bar').style.display='none';
+  showToast('✅ App install ho gayi! Home screen check karo.');
+});
+
+/* ══ DATA ══ */
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 let rows=[],hdrs=[],dateCols=new Set(),canvases=[];
 
@@ -166,11 +233,23 @@ function getCell(row,ci){const v=row[ci];return dateCols.has(ci)?toDate(v):(v??'
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function showToast(msg,dur=4000){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur)}
 
-/* ── DRAW IMAGE ── */
+/* ══ SEARCH ══ */
+function filterCards(q){
+  q=q.replace(/\D/g,'');
+  let found=0;
+  document.querySelectorAll('.ccard').forEach(card=>{
+    const match=!q||card.dataset.num.includes(q);
+    card.style.display=match?'block':'none';
+    if(match)found++;
+  });
+  document.getElementById('no-result').style.display=found===0?'block':'none';
+}
+
+/* ══ DRAW IMAGE ══ */
 function drawImg(dataRows,mci,rawPhone,footer,theme){
   const T=THEMES[theme]||THEMES.green;
   const cols=hdrs.map((_,i)=>i!==mci?i:null).filter(i=>i!==null);
-  const DPR=2,F='Arial',PAD=14,RH=36,HH=42,TH=46,FH=44,FS=12,HFS=12;
+  const DPR=2,F='Arial',PAD=14,RH=36,HH=42,TH=46,FH=52,FS=12,HFS=12;
   const tmp=document.createElement('canvas').getContext('2d');
   tmp.font=`bold ${HFS}px ${F}`;
   const cw=cols.map(ci=>{
@@ -185,15 +264,20 @@ function drawImg(dataRows,mci,rawPhone,footer,theme){
   const cv=document.createElement('canvas');
   cv.width=W*DPR;cv.height=H*DPR;cv.style.width=W+'px';cv.style.height=H+'px';
   const ctx=cv.getContext('2d');ctx.scale(DPR,DPR);
+  // bg
   ctx.fillStyle=T.bg;ctx.fillRect(0,0,W,H);
+  // title
   ctx.fillStyle=T.titBg;ctx.fillRect(0,0,W,TH);
-  ctx.fillStyle=T.titTxt;ctx.font=`bold 14px ${F}`;ctx.fillText('Orders — '+rawPhone,PAD,TH/2+5);
+  ctx.fillStyle=T.titTxt;ctx.font=`bold 14px ${F}`;
+  ctx.fillText('Orders — '+rawPhone,PAD,TH/2+5);
+  // header
   ctx.fillStyle=T.hBg;ctx.fillRect(0,TH,W,HH);
   let x=0;
   cols.forEach((ci,i)=>{
     ctx.fillStyle=T.hTxt;ctx.font=`bold ${HFS}px ${F}`;ctx.fillText(hdrs[ci],x+PAD,TH+HH/2+5);x+=cw[i];
     if(i<cols.length-1){ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,TH+7);ctx.lineTo(x,TH+HH-7);ctx.stroke();}
   });
+  // rows
   dataRows.forEach((row,ri)=>{
     const y=TH+HH+ri*RH;
     ctx.fillStyle=ri%2===0?T.r1:T.r2;ctx.fillRect(0,y,W,RH);
@@ -204,44 +288,29 @@ function drawImg(dataRows,mci,rawPhone,footer,theme){
       if(i<cols.length-1){ctx.strokeStyle=T.brd;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(x,y+4);ctx.lineTo(x,y+RH-4);ctx.stroke();}
     });
   });
+  // footer — big centered
   const fy=TH+HH+dataRows.length*RH;
   ctx.fillStyle=T.footBg;ctx.fillRect(0,fy,W,FH);
   ctx.strokeStyle=T.brd;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,fy);ctx.lineTo(W,fy);ctx.stroke();
   if(footer){
-    ctx.fillStyle=T.footTxt;
-    ctx.font=`bold 18px ${F}`;
-    ctx.textAlign='center';
-    ctx.fillText(footer, W/2, fy+FH/2+7);
-    ctx.textAlign='left';
+    ctx.fillStyle=T.footTxt;ctx.font=`bold 18px ${F}`;
+    ctx.textAlign='center';ctx.fillText(footer,W/2,fy+FH/2+7);ctx.textAlign='left';
   }
   ctx.strokeStyle=T.brd;ctx.lineWidth=1;ctx.strokeRect(.5,.5,W-1,H-1);
   return cv;
 }
 
-function dlCanvas(cv,fname){
-  const a=document.createElement('a');a.download=fname;a.href=cv.toDataURL('image/png');a.click();
-}
+function dlCanvas(cv,fname){const a=document.createElement('a');a.download=fname;a.href=cv.toDataURL('image/png');a.click();}
 
-/* ── SEND ── */
+/* ══ SEND ══ */
 function sendWA(idx){
   const {cv,num,raw}=canvases[idx];
-  const fname=num+'_orders.png';
-
-  // Step 1: Image download
-  dlCanvas(cv,fname);
-
-  // Step 2: whatsapp:// deep link — Regular WhatsApp pe seedha us number pe
-  // whatsapp:// scheme = Regular WhatsApp (com.whatsapp)
-  // wa.me = koi bhi WhatsApp (business ya regular)
-  setTimeout(()=>{
-    const waDeepLink = `whatsapp://send?phone=%2B${num}`;
-    window.location.href = waDeepLink;
-  }, 700);
-
-  showToast('📥 Image download ho rahi hai → Regular WhatsApp khul raha hai...');
+  dlCanvas(cv,num+'_orders.png');
+  setTimeout(()=>{window.location.href=`whatsapp://send?phone=%2B${num}`;},700);
+  showToast('📥 Image download → Regular WhatsApp khul raha hai...');
 }
 
-/* ── FILE LOAD ── */
+/* ══ FILE LOAD ══ */
 const dz=document.getElementById('drop-zone'),fi=document.getElementById('file-input');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
@@ -276,23 +345,9 @@ function setupCols(){
   document.getElementById('results').style.display='none';
 }
 function showErr(m){document.getElementById('err-box').innerHTML='<div class="errmsg">'+esc(m)+'</div>';}
-
-/* ── SEARCH / FILTER ── */
-function filterCards(query){
-  query = query.replace(/\D/g,''); // sirf digits
-  const allCards = document.querySelectorAll('.ccard');
-  let found = 0;
-  allCards.forEach(card=>{
-    const num = card.dataset.num || '';
-    const match = !query || num.includes(query);
-    card.style.display = match ? 'block' : 'none';
-    if(match) found++;
-  });
-  document.getElementById('no-result').style.display = found===0 ? 'block' : 'none';
-}
 function hideErr(){document.getElementById('err-box').innerHTML='';}
 
-/* ── PROCESS ── */
+/* ══ PROCESS ══ */
 function processData(){
   const mci=parseInt(document.getElementById('mobile-col').value);
   const theme=document.getElementById('img-style').value;
@@ -314,12 +369,15 @@ function processData(){
     `<div class="sbox"><div class="sn">${ga.length}</div><div class="sl">Images</div></div>`;
 
   const container=document.getElementById('cards');container.innerHTML='';
+  const sb=document.getElementById('search-box');if(sb)sb.value='';
+  document.getElementById('no-result').style.display='none';
 
   ga.forEach(([num,{raw,rows:r}],idx)=>{
     const cv=drawImg(r,mci,raw,footer,theme);
     canvases.push({cv,num,raw});
 
-    const card=document.createElement('div');card.className='ccard';card.dataset.num=num;
+    const card=document.createElement('div');
+    card.className='ccard';card.dataset.num=num;
 
     const top=document.createElement('div');top.className='ctop';
     top.innerHTML=
@@ -330,28 +388,23 @@ function processData(){
     const wrap=document.createElement('div');wrap.className='img-wrap';
     wrap.appendChild(cv);
 
-    // BIG SEND BUTTON
     const btn=document.createElement('button');btn.className='btn-send';
     btn.innerHTML=
       `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`+
-      `Send on WhatsApp — ${esc(String(raw))}`;
+      `Send — ${esc(String(raw))}`;
     btn.onclick=()=>sendWA(idx);
 
     const hint=document.createElement('div');hint.className='how-hint';
     hint.innerHTML=
       `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>`+
-      `📥 Image download hogi → Regular WhatsApp mein <strong>+${num}</strong> ka chat khulega → 📎 attach karo → Send!`;
+      `Image download hogi → Regular WhatsApp mein <strong>+${num}</strong> ka chat khulega → 📎 attach karo → Send!`;
 
-    wrap.appendChild(btn);
-    wrap.appendChild(hint);
-    card.appendChild(top);
-    card.appendChild(wrap);
+    wrap.appendChild(btn);wrap.appendChild(hint);
+    card.appendChild(top);card.appendChild(wrap);
     container.appendChild(card);
   });
 
   document.getElementById('results').style.display='block';
-  const sb=document.getElementById('search-box');if(sb)sb.value='';
-  document.getElementById('no-result').style.display='none';
   document.getElementById('results').scrollIntoView({behavior:'smooth'});
 }
 </script>
