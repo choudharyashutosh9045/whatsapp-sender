@@ -251,7 +251,7 @@ window.addEventListener('appinstalled',()=>{
 
 /* ══ DATA ══ */
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-let rows=[],hdrs=[],dateCols=new Set(),canvases=[],sentNums=new Set();
+let rows=[],hdrs=[],dateCols=new Set(),canvases=[],sentNums=new Set(),waWebTab=null;
 
 const THEMES={
   green:{bg:'#fff',titBg:'#075E54',titTxt:'#fff',hBg:'#128C7E',hTxt:'#fff',r1:'#fff',r2:'#f7fdf9',cell:'#111b21',brd:'#c8e6c9',footBg:'#dcf8c6',footTxt:'#075E54'},
@@ -367,6 +367,20 @@ function markCardSent(idx){
   if(sc)sc.textContent= `${sentNums.size} / ${canvases.length}`;
 }
 
+function openSameWAWebTab(url){
+  try{
+    if(waWebTab && !waWebTab.closed){
+      waWebTab.location.href=url;
+      waWebTab.focus();
+      return;
+    }
+  }catch(e){}
+  waWebTab=window.open(url,'WAExcelSenderTab');
+  if(waWebTab){
+    try{waWebTab.focus();}catch(e){}
+  }
+}
+
 /* ══ SEND ══ */
 async function sendWA(idx){
   const {cv,num,raw}=canvases[idx];
@@ -376,10 +390,10 @@ async function sendWA(idx){
   if(useWhatsAppWeb()){
     const copied=await copyCanvasToClipboard(cv);
     const waWebUrl=`https://web.whatsapp.com/send?phone=${num}`;
-    window.open(waWebUrl,'_blank','noopener');
+    openSameWAWebTab(waWebUrl);
     showToast(copied
-      ?'✅ Green Tick lag gaya! Image Copy + Download → WhatsApp Web mein Ctrl+V karke Send karein!'
-      :'✅ Green Tick lag gaya! Image Download → WhatsApp Web khul raha hai...');
+      ?'✅ Green Tick lag gaya! Same WA Web tab mein number khul raha hai (Ctrl+V dabayein)!'
+      :'✅ Green Tick lag gaya! Same WA Web tab mein number khul raha hai...');
   }else{
     setTimeout(()=>{window.location.href=`whatsapp://send?phone=%2B${num}`;},700);
     showToast('✅ Green Tick lag gaya! Image download → Regular WhatsApp khul raha hai...');
