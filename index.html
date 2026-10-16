@@ -495,6 +495,8 @@ function sendViaExtension(idx){
 async function sendWA(idx){
   const {cv,num,raw}=canvases[idx];
   checkExtInstalled();
+  const copied=await copyCanvasToClipboard(cv);
+  dlCanvas(cv,num+'_orders.png');
 
   if(useWhatsAppWeb() && extReady){
     showToast(`🚀 Auto-Sending to +${num} via WhatsApp Web...`);
@@ -504,19 +506,17 @@ async function sendWA(idx){
       showToast(`✅ +${num} ko image 100% Auto-Send ho gayi!`);
       return true;
     }
-    showToast(`⚠️ Auto-send fallback (${res&&res.error?res.error:'manual'}): Opening chat...`);
+    showToast(`⚠️ Auto-send message: ${res&&res.error?res.error:'Chat opened'}. Image copied (Ctrl+V)`);
   }
 
   markCardSent(idx);
-  dlCanvas(cv,num+'_orders.png');
 
   if(useWhatsAppWeb()){
-    const copied=await copyCanvasToClipboard(cv);
     const waWebUrl=`https://web.whatsapp.com/send?phone=${num}`;
     openSameWAWebTab(waWebUrl);
     showToast(copied
-      ?'✅ Green Tick lag gaya! Same WA Web tab mein number khul raha hai (Ctrl+V dabayein)!'
-      :'✅ Green Tick lag gaya! Same WA Web tab mein number khul raha hai...');
+      ?'✅ Green Tick! Image Copy + Download ho gayi → WhatsApp Web mein Ctrl+V karke Send karein!'
+      :'✅ Green Tick! Image download ho gayi → WhatsApp Web khul raha hai...');
   }else{
     setTimeout(()=>{window.location.href=`whatsapp://send?phone=%2B${num}`;},700);
     showToast('✅ Green Tick lag gaya! Image download → Regular WhatsApp khul raha hai...');
