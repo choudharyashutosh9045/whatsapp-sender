@@ -68,6 +68,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sn.sent-cnt{color:#16a34a}
 .sl{font-size:11px;color:var(--muted);margin-top:1px}
 
+/* ── AUTO SEND PANEL ── */
+.auto-panel{background:var(--card);border:2px solid var(--g);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:1rem;box-shadow:0 2px 8px rgba(37,211,102,.12)}
+.auto-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:.75rem}
+.auto-title{font-size:15px;font-weight:700;color:var(--gd);display:flex;align-items:center;gap:6px}
+.ext-pill{font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.ext-pill.ready{background:#dcfce7;color:#166534;border-color:#86efac}
+.auto-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.auto-select{font-size:13px;padding:9px 10px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fafafa;color:var(--txt);font-weight:600;outline:none;cursor:pointer}
+.btn-auto-start{flex:1;min-width:170px;background:var(--g);color:#fff;border:none;padding:11px 16px;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 2px 6px rgba(37,211,102,.35)}
+.btn-auto-start:hover{background:var(--gt)}
+.btn-auto-stop{display:none;background:#dc2626;color:#fff;border:none;padding:11px 16px;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer}
+.btn-ext-guide{background:#f0f2f5;color:var(--txt);border:1px solid var(--brd);padding:9px 12px;border-radius:var(--rs);font-size:12px;font-weight:600;cursor:pointer}
+.auto-status{margin-top:.65rem;font-size:12px;color:var(--muted);font-weight:600;display:none}
+.ext-guide-box{display:none;margin-top:.8rem;background:#f8fafc;border:1px solid var(--brd);border-radius:var(--rs);padding:.85rem 1rem;font-size:12.5px;line-height:1.65;color:var(--txt)}
+.ext-guide-box ol{padding-left:1.2rem;margin-top:.35rem}
+
 /* ── SEARCH ── */
 .search-wrap{position:relative;margin-bottom:1rem}
 .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;fill:#667781;pointer-events:none}
@@ -184,6 +200,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div id="results" style="display:none">
     <div class="stats" id="stats"></div>
+
+    <!-- AUTO SEND BULK BAR -->
+    <div class="auto-panel" id="auto-panel">
+      <div class="auto-top">
+        <div class="auto-title">🚀 100% Auto-Send All (Bulk Queue)</div>
+        <span class="ext-pill" id="ext-status-pill">🟡 Extension Setup Needed for 100% Auto</span>
+      </div>
+      <div class="auto-controls">
+        <select class="auto-select" id="auto-delay" title="Har message ke beech ka gap">
+          <option value="5000">Gap: 5 sec</option>
+          <option value="7000" selected>Gap: 7 sec (Safe)</option>
+          <option value="10000">Gap: 10 sec</option>
+          <option value="15000">Gap: 15 sec</option>
+        </select>
+        <button class="btn-auto-start" id="btn-auto-start" onclick="startAutoQueue()">▶ Start Auto-Send All</button>
+        <button class="btn-auto-stop" id="btn-auto-stop" onclick="stopAutoQueue()">⏹ Stop</button>
+        <button class="btn-ext-guide" id="btn-ext-guide" onclick="toggleExtGuide()">⚙️ 100% Auto Setup Kaise Karein?</button>
+      </div>
+      <div class="auto-status" id="auto-status"></div>
+      <div class="ext-guide-box" id="ext-guide-box">
+        <strong>💻 PC par 100% Automatic Send (Bina kuch dabaye) kaise chalayein:</strong>
+        <ol>
+          <li>Chat mein di gayi <strong>wa_auto_sender_extension.zip</strong> file download karke kisi folder mein <strong>Extract (Unzip)</strong> karein.</li>
+          <li>Chrome browser mein naye tab par <code>chrome://extensions</code> kholein aur upar right side mein <strong>Developer mode</strong> ON karein.</li>
+          <li>Left side mein <strong>Load unpacked</strong> button par click karein aur extract kiya hua <code>wa_auto_sender_extension</code> folder select karein.</li>
+          <li>Ab ek tab mein <strong>web.whatsapp.com</strong> khula rakhein aur is page ko refresh karein — upar badge <strong>🟢 Extension Connected (100% Auto)</strong> ho jayega!</li>
+          <li>Ab <strong>▶ Start Auto-Send All</strong> dabate hi bina tab reload kiye har number khulega, image paste hogi, Send click hoga aur Green Tick lagta jayega!</li>
+        </ol>
+      </div>
+    </div>
 
     <!-- SEARCH -->
     <div class="search-wrap">
@@ -381,9 +427,86 @@ function openSameWAWebTab(url){
   }
 }
 
+/* ══ EXTENSION BRIDGE & AUTO-QUEUE ══ */
+let extReady=false,autoRunning=false,autoTimer=null,pendingExtResolvers={};
+
+function checkExtInstalled(){
+  if(document.documentElement.getAttribute('data-wa-auto-ext')==='1'){
+    setExtConnected(true);
+  }
+}
+function setExtConnected(val){
+  extReady=val;
+  const pill=document.getElementById('ext-status-pill');
+  if(!pill)return;
+  if(val){
+    pill.textContent='🟢 Extension Connected (100% Auto-Send Ready)';
+    pill.classList.add('ready');
+  }else{
+    pill.textContent='🟡 Extension Setup Needed for 100% Auto';
+    pill.classList.remove('ready');
+  }
+}
+window.addEventListener('message',e=>{
+  if(!e.data||typeof e.data!=='object')return;
+  if(e.data.type==='WA_EXT_READY'){
+    setExtConnected(true);
+  }else if(e.data.type==='WA_EXT_SEND_RESULT'){
+    const fn=pendingExtResolvers[e.data.idx];
+    if(fn){
+      delete pendingExtResolvers[e.data.idx];
+      fn(e.data);
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded',()=>{
+  checkExtInstalled();
+  window.postMessage({type:'WA_EXT_PING'},'*');
+  setTimeout(checkExtInstalled,800);
+});
+
+function toggleExtGuide(){
+  const b=document.getElementById('ext-guide-box');
+  if(!b)return;
+  b.style.display=b.style.display==='block'?'none':'block';
+}
+
+function sendViaExtension(idx){
+  return new Promise(resolve=>{
+    const {cv,num}=canvases[idx];
+    const imgDataUrl=cv.toDataURL('image/png');
+    pendingExtResolvers[idx]=resolve;
+    window.postMessage({
+      type:'WA_EXT_SEND_ORDER',
+      idx,
+      num,
+      imgDataUrl
+    },'*');
+    setTimeout(()=>{
+      if(pendingExtResolvers[idx]){
+        delete pendingExtResolvers[idx];
+        resolve({ok:false,error:'Timeout'});
+      }
+    },22000);
+  });
+}
+
 /* ══ SEND ══ */
 async function sendWA(idx){
   const {cv,num,raw}=canvases[idx];
+  checkExtInstalled();
+
+  if(useWhatsAppWeb() && extReady){
+    showToast(`🚀 Auto-Sending to +${num} via WhatsApp Web...`);
+    const res=await sendViaExtension(idx);
+    if(res && res.ok){
+      markCardSent(idx);
+      showToast(`✅ +${num} ko image 100% Auto-Send ho gayi!`);
+      return true;
+    }
+    showToast(`⚠️ Auto-send fallback (${res&&res.error?res.error:'manual'}): Opening chat...`);
+  }
+
   markCardSent(idx);
   dlCanvas(cv,num+'_orders.png');
 
@@ -397,6 +520,57 @@ async function sendWA(idx){
   }else{
     setTimeout(()=>{window.location.href=`whatsapp://send?phone=%2B${num}`;},700);
     showToast('✅ Green Tick lag gaya! Image download → Regular WhatsApp khul raha hai...');
+  }
+  return true;
+}
+
+async function startAutoQueue(){
+  if(autoRunning)return;
+  const unsent=canvases.map((item,i)=>sentNums.has(item.num)?null:i).filter(i=>i!==null);
+  if(!unsent.length){
+    showToast('🎉 Saare numbers ko pehle hi bhej diya gaya hai!');
+    return;
+  }
+  autoRunning=true;
+  const startBtn=document.getElementById('btn-auto-start');
+  const stopBtn=document.getElementById('btn-auto-stop');
+  const statusEl=document.getElementById('auto-status');
+  const delaySel=document.getElementById('auto-delay');
+  const gapMs=parseInt(delaySel?delaySel.value:'7000')||7000;
+
+  if(startBtn)startBtn.style.display='none';
+  if(stopBtn)stopBtn.style.display='inline-block';
+  if(statusEl)statusEl.style.display='block';
+
+  for(let k=0;k<unsent.length;k++){
+    if(!autoRunning)break;
+    const idx=unsent[k];
+    const item=canvases[idx];
+    const card=document.getElementById('card-'+idx);
+    if(card)card.scrollIntoView({behavior:'smooth',block:'center'});
+    if(statusEl){
+      statusEl.textContent=`⏳ Sending ${k+1} of ${unsent.length} → +${item.num} (${item.raw})...`;
+    }
+    await sendWA(idx);
+    if(!autoRunning || k===unsent.length-1)break;
+    await new Promise(r=>{autoTimer=setTimeout(r,gapMs);});
+  }
+
+  stopAutoQueue(true);
+}
+
+function stopAutoQueue(finished=false){
+  autoRunning=false;
+  if(autoTimer){clearTimeout(autoTimer);autoTimer=null;}
+  const startBtn=document.getElementById('btn-auto-start');
+  const stopBtn=document.getElementById('btn-auto-stop');
+  const statusEl=document.getElementById('auto-status');
+  if(startBtn)startBtn.style.display='flex';
+  if(stopBtn)stopBtn.style.display='none';
+  if(statusEl){
+    statusEl.textContent=finished
+      ?`✅ Auto-Send Queue Complete! (${sentNums.size} / ${canvases.length} Sent)`
+      :`⏸ Auto-Send Paused (${sentNums.size} / ${canvases.length} Sent)`;
   }
 }
 
